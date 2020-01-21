@@ -20,8 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   splashscreen:
-  provider: ^3.1.0
-  flutter_login: ^1.0.11
+  provider: ^2.0.1
   firebase_core: ^0.4.0+8
   #google_sign_in: ^4.0.0
   firebase_auth: ^0.15.0+1
@@ -54,6 +53,7 @@ flutter:
     - bubble.gif
     - simStore.png
     - simCover.gif
+    - bg1.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1082912304416",
+    "firebase_url": "https://pfeinwi.firebaseio.com",
+    "project_id": "pfeinwi",
+    "storage_bucket": "pfeinwi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082912304416:android:e4bcde81b9f1bd3a1cbb45",
+        "android_client_info": {
+          "package_name": "com.pfe.carte_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082912304416-boenphke7hg0a6gu4i377br5ks94tptg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIVKTh0Cdj3XqHkIMuf8i6ny4kfYUr2EE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082912304416-boenphke7hg0a6gu4i377br5ks94tptg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
