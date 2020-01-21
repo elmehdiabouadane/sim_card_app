@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class Dashboard extends StatefulWidget {
+class PasserCommande extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return DashboardState();
+    return PasserCommandeState();
   }
 }
 
-class DashboardState extends State<Dashboard> {
+class PasserCommandeState extends State<PasserCommande> {
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      body: Text('Dashboard')
+        body: Text('Passer Commande')
     );
   }
 

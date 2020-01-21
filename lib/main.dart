@@ -1,4 +1,6 @@
+import 'package:carte_app/bottomNavigationBarModel/home.dart';
 import 'package:carte_app/login.dart';
+import 'package:carte_app/providerDashboard/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +43,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: new LoginPage()
+        home: new Home()
     );/*ChangeNotifierProvider(
       builder: (_) => UserRepository.instance(),
       /*child: Consumer(
