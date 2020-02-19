@@ -91,7 +91,7 @@ class DashboardState extends State<Dashboard> {
                     [
                       Material
                         (
-                          color: Colors.black,
+                          color: Color(0xFFE65100),
                           borderRadius: BorderRadius.circular(25.0),
                           child: Center
                             (
@@ -111,7 +111,7 @@ class DashboardState extends State<Dashboard> {
                         [
                           Text('ABOUADANE El Mehdi',
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Color(0xFFE65100),
                                 fontFamily: 'Poppins',
                                 fontSize: 20.0
                               )),
@@ -121,7 +121,8 @@ class DashboardState extends State<Dashboard> {
                                 children: <Widget>[
                                   Text("Deconnecté",
                                     style: TextStyle(
-                                        fontFamily: 'Poppins'
+                                        fontFamily: 'Poppins',
+                                      color: Colors.white,
                                     ),
                                   ),
                                   Icon(
@@ -136,7 +137,8 @@ class DashboardState extends State<Dashboard> {
                               children: <Widget>[
                                 Text("Connecté",
                                   style: TextStyle(
-                                      fontFamily: 'Poppins'
+                                      fontFamily: 'Poppins',
+                                    color: Color(0xFFE65100),
                                   ),
                                 ),
                                 Icon(
@@ -164,7 +166,7 @@ class DashboardState extends State<Dashboard> {
                     [
                       Material
                         (
-                          color: Colors.black,
+                          color: Color(0xFFE65100),
                           borderRadius: BorderRadius.circular(25.0),
                           child: Center
                             (
@@ -184,13 +186,13 @@ class DashboardState extends State<Dashboard> {
                         [
                           Text('2 commandes',
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: Color(0xFFE65100),
                                   fontFamily: 'Poppins',
                                   fontSize: 20.0
                               )),
                           Text('60 DHs',
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: Color(0xFFE65100),
                                   fontFamily: 'Poppins',
                                   fontSize: 15.0
                               ))
@@ -212,7 +214,7 @@ class DashboardState extends State<Dashboard> {
                     [
                       Material
                         (
-                          color: Colors.black,
+                          color: Color(0xFFE65100),
                           borderRadius: BorderRadius.circular(25.0),
                           child: Center
                             (
@@ -232,7 +234,7 @@ class DashboardState extends State<Dashboard> {
                         [
                           Text('Envoyer',
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: Color(0xFFE65100),
                                   fontFamily: 'Poppins',
                                   fontSize: 16.0
                               )),
@@ -254,7 +256,7 @@ class DashboardState extends State<Dashboard> {
                     [
                       Material
                         (
-                          color: Colors.black,
+                          color: Color(0xFFE65100),
                           borderRadius: BorderRadius.circular(25.0),
                           child: Center
                             (
@@ -274,7 +276,7 @@ class DashboardState extends State<Dashboard> {
                         [
                           Text('Ajouter',
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: Color(0xFFE65100),
                                   fontFamily: 'Poppins',
                                   fontSize: 16.0
                               )),
@@ -299,6 +301,7 @@ class DashboardState extends State<Dashboard> {
 
   Widget _buildTile(Widget child, {Function() onTap}) {
     return Material(
+      color: Color(0xFFFFD180),
         elevation: 10.0,
         borderRadius: BorderRadius.circular(25.0),
         shadowColor: Color(0x802196F3),
