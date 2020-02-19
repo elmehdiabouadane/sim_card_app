@@ -7,9 +7,12 @@ import 'package:flutter/widgets.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 class Home extends StatefulWidget {
+
+  final int numPage;
+  Home({Key key, @required this.numPage}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return HomeState();
   }
 }
@@ -17,6 +20,18 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> {
 
   int _index = 0;
+
+  int nPage(){
+    if(widget.numPage == 0) {
+      return 0;
+    }else if(widget.numPage == 1) {
+      return 1;
+    }
+  }
+
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +53,6 @@ class HomeState extends State<Home> {
       initialPage: 0,
       keepPage: true
   );
-
-  void initState() {
-    super.initState();
-  }
 
   Widget buildPageView() {
     return PageView(
