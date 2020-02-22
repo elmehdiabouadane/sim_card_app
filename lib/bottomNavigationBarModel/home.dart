@@ -1,6 +1,7 @@
 import 'package:carte_app/bottomNavigationBarModel/bottomNavBar.dart';
 import 'package:carte_app/providerAfficherCommande/afficher_commande.dart';
 import 'package:carte_app/providerDashboard/dashboard.dart';
+import 'package:carte_app/providerPasserCommande/passer_commande_home.dart';
 import 'package:carte_app/providerPasserCommande/passer_commande.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -64,7 +65,7 @@ class HomeState extends State<Home> {
       children: <Widget>[
         Dashboard(),
         AfficherCommande(),
-        PasserCommande()
+        PasserCommandeHomme()
       ],
     );
   }
