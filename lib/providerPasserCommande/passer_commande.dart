@@ -28,6 +28,7 @@ class PasserCommandeState extends State<PasserCommande> {
       pickedImage = tempStore;
       isImageLoaded = true;
     });
+    this.readText();
   }
 
   Future readText() async {
@@ -97,11 +98,17 @@ class PasserCommandeState extends State<PasserCommande> {
               onPressed: pickImage,
             ),
             SizedBox(height: 10.0),
-            RaisedButton(
+            /*RaisedButton(
               child: Text('Read Text'),
               onPressed: readText,
             ),
-            Text(text)
+
+            Text(text)*/
+            text == ""
+                ? Center(child: CircularProgressIndicator())
+                : RaisedButton(
+                  child: Text('Retour'),
+                ),
           ],
         )
     );
