@@ -39,11 +39,14 @@ class HomeState extends State<Home> {
     return Scaffold(
       body: buildPageView(),
       bottomNavigationBar: BottomNavyBar(
+        backgroundColor: Color(0xFFE65100),
+        itemCornerRadius: 15.0,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         items: itemsBottomBar,
         onItemSelected:(index){bottomTapped(index);},
         animationDuration: Duration(milliseconds: 200),
         selectedIndex: _index,
-        iconSize: 20.0,
+        iconSize: 25.0,
         showElevation: true,
       ),
     );
@@ -56,6 +59,7 @@ class HomeState extends State<Home> {
 
   Widget buildPageView() {
     return PageView(
+      physics: BouncingScrollPhysics(),
       controller: pageController,
       scrollDirection: Axis.horizontal,
       onPageChanged: (index) {
@@ -64,7 +68,6 @@ class HomeState extends State<Home> {
       children: <Widget>[
         Dashboard(),
         AfficherCommande(),
-        PasserCommande()
       ],
     );
   }
