@@ -285,7 +285,7 @@ class DashboardState extends State<Dashboard> {
                     ]
                 ),
               ),
-              //onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Home(1))),
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PasserCommande())),
             ),
           ],
           staggeredTiles: [

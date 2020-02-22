@@ -2,6 +2,7 @@ import 'package:carte_app/bottomNavigationBarModel/bottomNavBar.dart';
 import 'package:carte_app/providerAfficherCommande/afficher_commande.dart';
 import 'package:carte_app/providerDashboard/dashboard.dart';
 import 'package:carte_app/providerPasserCommande/passer_commande.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
@@ -39,11 +40,14 @@ class HomeState extends State<Home> {
     return Scaffold(
       body: buildPageView(),
       bottomNavigationBar: BottomNavyBar(
+        itemCornerRadius: 15.0,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        backgroundColor: Color(0xFFE65100),
         items: itemsBottomBar,
         onItemSelected:(index){bottomTapped(index);},
         animationDuration: Duration(milliseconds: 200),
         selectedIndex: _index,
-        iconSize: 20.0,
+        iconSize: 25.0,
         showElevation: true,
       ),
     );
@@ -56,6 +60,7 @@ class HomeState extends State<Home> {
 
   Widget buildPageView() {
     return PageView(
+      physics: BouncingScrollPhysics(),
       controller: pageController,
       scrollDirection: Axis.horizontal,
       onPageChanged: (index) {
@@ -63,8 +68,7 @@ class HomeState extends State<Home> {
       },
       children: <Widget>[
         Dashboard(),
-        AfficherCommande(),
-        PasserCommande()
+        AfficherCommande()
       ],
     );
   }
