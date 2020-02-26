@@ -19,7 +19,7 @@ class Dashboard extends StatefulWidget {
   }
 }
 
-class DashboardState extends State<Dashboard> {
+class DashboardState extends State<Dashboard> with AutomaticKeepAliveClientMixin {
 
   StreamSubscription _connectionChangeStream;
 
@@ -42,8 +42,8 @@ class DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
 
     final UserRepository user = new UserRepository.instance();
-    FirebaseAuth _auth;
-    //final FirebaseUser currentUser = _auth.currentUser();
+    final passComm = PasserCommandeState();
+    String cValue = passComm.countValue.toString();
 
     final iconLogOut = IconButton(
         icon: Image.asset("exit.png"),
@@ -109,7 +109,7 @@ class DashboardState extends State<Dashboard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>
                         [
-                          Text('ABOUADANE El Mehdi',
+                          Text("ABOUADANE El Mehdi",
                               style: TextStyle(
                                 color: Color(0xFFE65100),
                                 fontFamily: 'Poppins',
@@ -119,10 +119,10 @@ class DashboardState extends State<Dashboard> {
                             child: new Container(
                               child: Row(
                                 children: <Widget>[
-                                  Text("Deconnecté",
+                                  Text("Déconnecté",
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
-                                      color: Colors.white,
+                                      color: Color(0xFFE65100),
                                     ),
                                   ),
                                   Icon(
@@ -184,7 +184,7 @@ class DashboardState extends State<Dashboard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>
                         [
-                          Text('2 commandes',
+                          Text(cValue+' commandes',
                               style: TextStyle(
                                   color: Color(0xFFE65100),
                                   fontFamily: 'Poppins',
@@ -313,5 +313,9 @@ class DashboardState extends State<Dashboard> {
         )
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 
 }

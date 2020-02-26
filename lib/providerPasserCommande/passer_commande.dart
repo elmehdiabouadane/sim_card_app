@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:csv/csv.dart';
+import 'package:provider/provider.dart';
 
 class PasserCommande extends StatefulWidget {
   @override
@@ -16,6 +17,9 @@ class PasserCommande extends StatefulWidget {
 }
 
 class PasserCommandeState extends State<PasserCommande> {
+
+  int countValue = 1;
+
   File  pickedImage;
   List<List<String>> textList=[];
   List<String> lineList=[];
@@ -95,7 +99,10 @@ class PasserCommandeState extends State<PasserCommande> {
             SizedBox(height: 10.0),
             RaisedButton(
               child: Text('Pick an image'),
-              onPressed: pickImage,
+              onPressed: () {
+                pickImage;
+                setState(() => countValue += 1);
+              },
             ),
             SizedBox(height: 10.0),
             /*RaisedButton(
