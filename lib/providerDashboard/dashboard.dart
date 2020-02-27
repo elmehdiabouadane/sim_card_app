@@ -4,6 +4,7 @@ import 'package:carte_app/bottomNavigationBarModel/home.dart';
 import 'package:carte_app/connectivity/connectionStatusSingleton.dart';
 import 'package:carte_app/providerLogin/model/user_repository.dart';
 import 'package:carte_app/providerPasserCommande/passer_commande.dart';
+import 'package:carte_app/providerPasserCommande/passer_commande_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -285,7 +286,7 @@ class DashboardState extends State<Dashboard> with AutomaticKeepAliveClientMixin
                     ]
                 ),
               ),
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PasserCommande())),
+              onTap: () =>  Navigator.push(context, MaterialPageRoute(builder: (context) => PasserCommande(type : "CIN Face 1"))),
             ),
           ],
           staggeredTiles: [

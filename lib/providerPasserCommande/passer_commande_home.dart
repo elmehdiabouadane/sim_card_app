@@ -12,6 +12,9 @@ class PasserCommandeHomme extends StatefulWidget {
 
 class _PasserCommandeHommeState extends State<PasserCommandeHomme> {
   @override
+  String Face1;
+  String Face2;
+  String Sim;
   Widget build(BuildContext context) {
 
     return   Scaffold(
@@ -36,27 +39,37 @@ class _PasserCommandeHommeState extends State<PasserCommandeHomme> {
     ),
     body: ListView(
       children: <Widget>[
-       Row(
-         children: <Widget>[
-           Checkbox(
-             value: false,
-            ),
-           Text("CIN Face 1")
-         ],
-       ),
-        Row(
-          children: <Widget>[
-            Checkbox(value: false,),
-            Text("CIN Face 2")
-          ],
+        SizedBox(
+          height: 15,
         ),
-        Row(
-          children: <Widget>[
-            Checkbox(value: false,),
-            Text("Carte Sim")
-          ],
-        )
-      ],
+        FlatButton(
+          onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => PasserCommande(type : "CIN Face 1"))),
+          child: Text("CIN Face 1",
+              style: TextStyle(color: Colors.deepOrangeAccent) ),
+          shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(18.0),
+              side: BorderSide(color: Colors.red)
+          ),
+    ),
+        FlatButton(
+          onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => PasserCommande(type : "CIN Face 2"))),
+          child: Text("CIN Face 2",
+              style: TextStyle(color: Colors.deepOrangeAccent)),
+          shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(18.0),
+              side: BorderSide(color: Colors.red)
+          ),
+        ),
+        FlatButton(
+          onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => PasserCommande(type : "Carte SIM"))),
+          child: Text("Carte SIM",
+          style: TextStyle(color: Colors.deepOrangeAccent)),
+          shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(18.0),
+              side: BorderSide(color: Colors.red)
+          ),
+        ),
+      ]
     )
     );
   }

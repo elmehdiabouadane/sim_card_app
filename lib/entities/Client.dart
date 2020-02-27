@@ -1,19 +1,29 @@
 import 'package:carte_app/entities/CinCard.dart';
 
 class Client {
-  String _Id;
-  String _Nom;
-  String _Prenom;
-  String _Address;
-  DateTime _dateNaissance;
-  CinCard _cinCard;
+  String Id;
+  String Nom;
+  String Prenom;
+  String Address;
+  String dateNaissance;
+  CinCard cinCard;
 
-  Client( String id , String nom , String prenom, String add,DateTime dateN, CinCard cin){
-    this._Id = id ;
-    this._Nom = nom;
-    this._Prenom = prenom;
-    this._Address = add;
-    this._dateNaissance = dateN;
-    this._cinCard = cin;
+  Client();
+  Map<String, dynamic> toJson() {
+    return {
+      'id': Id,
+      'nom': Nom,
+      'prenom': Prenom,
+      'datenaissance' : dateNaissance,
+      'adress' : Address,
+      'cin' : cinCard,
+    };
   }
+  Client.fromJson(Map<String, dynamic> json)
+      : Id= json['id'],
+        Nom = json['face1'],
+        Prenom= json['face2'],
+        dateNaissance=json['dateValidite'],
+        Address = json['adress'],
+        cinCard=json['cin'];
 }

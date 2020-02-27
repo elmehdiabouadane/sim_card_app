@@ -1,13 +1,23 @@
 class CinCard {
-  String _idCard;
-  String _Face1;
-  String _Face2;
-  String _DateValidite;
+   String idCard;
+  String face1;
+   String face2;
+   String datevalidite;
 
-  CinCard(String id, String face1,String face2,String date){
-    this._idCard = id ;
-    this._Face1 = face1;
-    this._Face2 = face2;
-    this._DateValidite = date;
+  CinCard({this.idCard,this.datevalidite,this.face1,this.face2});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': idCard,
+      'face1': face1,
+      'face2': face2,
+      'dateValidite' : datevalidite
+    };
   }
+  CinCard.fromJson(Map<String, dynamic> json)
+      : idCard = json['id'],
+        face1 = json['face1'],
+        face2= json['face2'],
+        datevalidite=json['dateValidite'];
+
 }
