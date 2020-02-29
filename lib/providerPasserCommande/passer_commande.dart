@@ -55,8 +55,18 @@ class PasserCommandeState extends State<PasserCommande> {
         lineList = [];
       }
     }
+    //num : 14 , Prenom : 5 , Nom : 6, naissence : 8 , valide  : 10
+   /* String csv = const ListToCsvConverter().convert(textList);
+    print(csv);
+    setState(() {
+      text=text+csv;
+    });*/
+  }
+
+  extractData(){
     switch (widget.type){
       case "CIN Face 1" :{
+        readText();
         if(textList.length >= 14) {
           newCin.idCard = textList[14].toString();
           print(textList[14].toString());
@@ -71,21 +81,28 @@ class PasserCommandeState extends State<PasserCommande> {
             text = "";
           });
         }
-        else {print("error");};
+        else {print("error");}
       }
       break;
-      case "CIN Face 2":{}
+      case "CIN Face 2":{
+        readText();
+      }
       break;
-      case "Carte SIM":{}
+      case "Carte SIM":{
+        decode();
+      }
       break;
 
     }
-    //num : 14 , Prenom : 5 , Nom : 6, naissence : 8 , valide  : 10
-   /* String csv = const ListToCsvConverter().convert(textList);
-    print(csv);
-    setState(() {
-      text=text+csv;
-    });*/
+  }
+  Future decode() async {
+    FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
+    BarcodeDetector barcodeDetector = FirebaseVision.instance.barcodeDetector();
+    List barCodes = await barcodeDetector.detectInImage(ourImage);
+
+    for (Barcode readableCode in barCodes) {
+      print(readableCode.displayValue);
+    }
   }
 
   @override

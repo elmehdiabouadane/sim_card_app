@@ -1,31 +1,37 @@
 
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'dart:convert';
+import 'package:sembast/sembast.dart';
+import 'package:sembast/sembast_io.dart';
 
-class SharedPref {
-  read(String key) async {
-    final prefs = await SharedPreferences.getInstance();
-    return json.decode(prefs.getString(key));
-  }
+class SembastRepo {
 
-  save(String key, value) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, json.encode(value));
-  }
+  Future saveData() async{
+    // File path to a file in the current directory
+    String dbPath = 'commande.db';
+    DatabaseFactory dbFactory = databaseFactoryIo;
 
-  remove(String key) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove(key);
+    // We use the database factory to open the database
+    Database db = await dbFactory.openDatabase(dbPath);
+    var store = StoreRef.main();
+    // simple Values
+    var key = await store.add(db, {'name': 'ugly'});
+    var record = await store.record(key).getSnapshot(db);
+    record =
+        (await store.find(db, finder: Finder(filter: Filter.byKey(record.key))))
+            .first;
+    print(record);
+    var records = (await store.find(db,
+        finder: Finder(filter: Filter.matches('name', '^ugly'))));
+    print(records);
+
+    //Object
+
+    var storeMap = intMapStoreFactory.store();
+    var keyMap = await storeMap.add(db, {'path': {'sub': 'my_value', 'Test1':'Test'},});
+
+    var recordMap = await storeMap.record(keyMap).getSnapshot(db);
+    var valueMap = recordMap['path.sub'];
+    print(valueMap);
   }
-  getAllPrefs() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    /* return prefs
-        .getKeys()
-        .map<String>((key) =>
-        ListTile(
-      title: Text(key),
-      subtitle: Text(prefs.get(key).toString()),
-    ))
-        .toList(growable: false)*/
   }
-}
