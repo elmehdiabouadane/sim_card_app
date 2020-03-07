@@ -17,7 +17,9 @@ class AfficherCommandeState extends State<AfficherCommande> with AutomaticKeepAl
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+
+    //final navigation = Provider.of<ModelPasserCommande>(context);
+    final ModelPasserCommande navigation = new ModelPasserCommande();
     final UserRepository user = new UserRepository.instance();
     //final myModel = Provider.of<ModelPasserCommande>(context, listen: false);
 
@@ -28,7 +30,31 @@ class AfficherCommandeState extends State<AfficherCommande> with AutomaticKeepAl
         }
     );
 
-    return ChangeNotifierProvider<ModelPasserCommande>(
+    return Scaffold(
+      appBar: AppBar(
+        actions: <Widget>[
+          iconLogOut,
+        ],
+        title: Text(
+          "Afficher commande",
+          style: TextStyle(
+              fontFamily: 'Poppins'
+          ),
+        ),
+        backgroundColor: Color(0xFFE65100),
+      ),
+      drawer: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text("Hi"),
+          navigation.updateNavigation("Passer"),
+        ],
+      ),
+      body: navigation.getNavigation,
+    );
+
+    /*return ChangeNotifierProvider<ModelPasserCommande>(
       builder: (context) => ModelPasserCommande(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -56,7 +82,7 @@ class AfficherCommandeState extends State<AfficherCommande> with AutomaticKeepAl
                     return RaisedButton(
                       child: Text('Do something'),
                       onPressed: (){
-                        ModelPasserCommande.doSomething();
+                        ModelPasserCommande.
                       },
                     );
                   },
@@ -74,7 +100,7 @@ class AfficherCommandeState extends State<AfficherCommande> with AutomaticKeepAl
           ),
         ),
       ),
-    );
+    );*/
 
     /*return Scaffold(
         appBar: AppBar(

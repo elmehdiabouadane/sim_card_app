@@ -70,6 +70,8 @@ class PasserCommandeState extends State<PasserCommande> {
             widget.type = "CIN Face 2";
             text = "";
           });
+
+
         }
         else {print("error");};
       }
