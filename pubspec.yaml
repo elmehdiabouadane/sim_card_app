@@ -31,7 +31,8 @@ dependencies:
   firebase_ml_vision:
   image_picker:
   shared_preferences:
-
+  sembast:
+  rflutter_alert: ^1.0.3
   csv: ^4.0.3
 
   # The following adds the Cupertino Icons font to your application.

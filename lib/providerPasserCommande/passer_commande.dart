@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:csv/csv.dart';
 import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class PasserCommande extends StatefulWidget {
 
@@ -27,8 +28,7 @@ class PasserCommandeState extends State<PasserCommande> {
   CinCard newCin;
   Client newClient;
   File  pickedImage;
-  List<List<String>> textList=[];
-  List<String> lineList=[];
+
 
   bool isImageLoaded = false;
   String text = "";
@@ -38,60 +38,125 @@ class PasserCommandeState extends State<PasserCommande> {
       pickedImage = tempStore;
       isImageLoaded = true;
     });
-    this.readText();
+    this.extractData();
   }
 
-  Future readText() async {
-    textList = [];
-    FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
-    TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
-    VisionText readText = await recognizeText.processImage(ourImage);
-    for (TextBlock block in readText.blocks) {
-      for (TextLine line in block.lines) {
-        for (TextElement word in line.elements) {
-          lineList.add(word.text);
-        }
-        textList.add(lineList);
-        lineList = [];
-      }
-    }
+  readText() async {
+
     //num : 14 , Prenom : 5 , Nom : 6, naissence : 8 , valide  : 10
-   /* String csv = const ListToCsvConverter().convert(textList);
+   /* print(textList[14].toString());
+   String csv = const ListToCsvConverter().convert(textList);
     print(csv);
     setState(() {
       text=text+csv;
     });*/
-  }
 
-  extractData(){
+   /*
+    */
+  }
+  alertShow(cin){
+    Alert(
+      context: context,
+      type: AlertType.warning,
+      title: "Le CIN est ",
+      desc: cin + " ",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "OUI",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () => {
+             setState(() {
+               pickedImage = null;
+                isImageLoaded = false;
+               widget.type = "CIN Face 2";
+               text = "";
+             }),
+            Navigator.pop(context),
+            },
+          color: Color.fromRGBO(0, 179, 134, 1.0),
+        ),
+        DialogButton(
+          child: Text(
+            "NON",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () => { Navigator.pop(context),
+            pickImage()},
+          gradient: LinearGradient(colors: [
+            Color.fromRGBO(116, 116, 191, 1.0),
+            Color.fromRGBO(52, 138, 199, 1.0)
+          ]),
+        )
+      ],
+    ).show();
+  }
+  extractData() async{
     switch (widget.type){
       case "CIN Face 1" :{
-        readText();
-        if(textList.length >= 14) {
-          newCin.idCard = textList[14].toString();
-          print(textList[14].toString());
-          newCin.datevalidite = textList[10].toString();
-          newClient.Nom = textList[6].toString();
-          newClient.Prenom = textList[5].toString();
-          newClient.dateNaissance = textList[8].toString();
-          setState(() {
-            pickedImage = null;
-            isImageLoaded = false;
-            widget.type = "CIN Face 2";
-            text = "";
-          });
-
-
+        List<List<String>> textList=[];
+        List<String> lineList=[];
+        FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
+        TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
+        VisionText readText = await recognizeText.processImage(ourImage);
+        for (TextBlock block in readText.blocks) {
+          for (TextLine line in block.lines) {
+            for (TextElement word in line.elements) {
+              lineList.add(word.text);
+            }
+            textList.add(lineList);
+            lineList = [];
+          }
         }
-        else {print("error");}
+        if(textList.length > 14) {
+         var cinNumber = textList[textList.length-1].toString();
+          String csv1 = const ListToCsvConverter().convert(textList);
+          print(csv1);
+          alertShow(cinNumber);
+        }
+        else {
+          pickImage();
+        }
       }
       break;
       case "CIN Face 2":{
-        readText();
+        List<List<String>> textList=[];
+        List<String> lineList=[];
+        FirebaseVisionImage ourImage = FirebaseVisionImage.fromFile(pickedImage);
+        TextRecognizer recognizeText = FirebaseVision.instance.textRecognizer();
+        VisionText readText = await recognizeText.processImage(ourImage);
+        for (TextBlock block in readText.blocks) {
+          for (TextLine line in block.lines) {
+            for (TextElement word in line.elements) {
+              lineList.add(word.text);
+            }
+            textList.add(lineList);
+            lineList = [];
+          }
+        }
+       // if(textList.length > 14) {
+        print(textList[5]);
+         // var cinNumber = textList[14].toString();
+          String csv1 = const ListToCsvConverter().convert(textList);
+          print(csv1);
+          //alertShow(cinNumber);
+       /* }
+        else {
+          pickImage();
+        }*/
       }
       break;
       case "Carte SIM":{
-        decode();
+        //decode();
+        print('Carte SIM');
+        text="test";
+        setState(() {
+          pickedImage = null;
+          isImageLoaded = false;
+          //widget.type = "CIN Face 2";
+          text = "";
+        });
       }
       break;
 
