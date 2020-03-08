@@ -1,7 +1,12 @@
 import 'dart:io';
 
+import 'package:carte_app/bottomNavigationBarModel/home.dart';
 import 'package:carte_app/entities/CinCard.dart';
 import 'package:carte_app/entities/Client.dart';
+import 'package:carte_app/materials/dot_type.dart';
+import 'package:carte_app/materials/loader.dart';
+import 'package:carte_app/materials/simple_round_icon_button.dart';
+import 'package:carte_app/providerDashboard/dashboard.dart';
 import 'package:carte_app/providerLogin/model/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -41,7 +46,7 @@ class PasserCommandeState extends State<PasserCommande> {
     this.extractData();
   }
 
-  readText() async {
+/*  readText() async {
 
     //num : 14 , Prenom : 5 , Nom : 6, naissence : 8 , valide  : 10
    /* print(textList[14].toString());
@@ -51,10 +56,10 @@ class PasserCommandeState extends State<PasserCommande> {
       text=text+csv;
     });*/
 
-   /*
-    */
-  }
-  alertShow(cin){
+
+
+  }*/
+  alertShowCin(cin){
     Alert(
       context: context,
       type: AlertType.warning,
@@ -75,6 +80,44 @@ class PasserCommandeState extends State<PasserCommande> {
              }),
             Navigator.pop(context),
             },
+          color: Color.fromRGBO(0, 179, 134, 1.0),
+        ),
+        DialogButton(
+          child: Text(
+            "NON",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () => { Navigator.pop(context),
+            pickImage()},
+          gradient: LinearGradient(colors: [
+            Color.fromRGBO(116, 116, 191, 1.0),
+            Color.fromRGBO(52, 138, 199, 1.0)
+          ]),
+        )
+      ],
+    ).show();
+  }
+  alertShowAdd(Adress){
+    Alert(
+      context: context,
+      type: AlertType.warning,
+      title: " Vérfiez l'adress ",
+      desc: Adress + " ",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "OUI",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () => {
+            setState(() {
+              pickedImage = null;
+              isImageLoaded = false;
+              widget.type = "Carte SIM";
+              text = "";
+            }),
+            Navigator.pop(context),
+          },
           color: Color.fromRGBO(0, 179, 134, 1.0),
         ),
         DialogButton(
@@ -113,7 +156,7 @@ class PasserCommandeState extends State<PasserCommande> {
          var cinNumber = textList[textList.length-1].toString();
           String csv1 = const ListToCsvConverter().convert(textList);
           print(csv1);
-          alertShow(cinNumber);
+          alertShowCin(cinNumber);
         }
         else {
           pickImage();
@@ -135,28 +178,21 @@ class PasserCommandeState extends State<PasserCommande> {
             lineList = [];
           }
         }
-       // if(textList.length > 14) {
+        if(textList.length > 5) {
         print(textList[5]);
          // var cinNumber = textList[14].toString();
           String csv1 = const ListToCsvConverter().convert(textList);
           print(csv1);
-          //alertShow(cinNumber);
-       /* }
+          alertShowAdd(textList[5].toString());
+        }
         else {
           pickImage();
-        }*/
+        }
       }
       break;
       case "Carte SIM":{
-        //decode();
-        print('Carte SIM');
-        text="test";
-        setState(() {
-          pickedImage = null;
-          isImageLoaded = false;
-          //widget.type = "CIN Face 2";
-          text = "";
-        });
+        decode();
+
       }
       break;
 
@@ -167,9 +203,32 @@ class PasserCommandeState extends State<PasserCommande> {
     BarcodeDetector barcodeDetector = FirebaseVision.instance.barcodeDetector();
     List barCodes = await barcodeDetector.detectInImage(ourImage);
 
-    for (Barcode readableCode in barCodes) {
-      print(readableCode.displayValue);
-    }
+      for (Barcode readableCode in barCodes) {
+        print(readableCode.displayValue);
+        Alert(
+          context: context,
+          type: AlertType.success,
+          title: " Commande enregistrée",
+          desc: readableCode.displayValue + " ",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "OK !",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home())),
+              },
+              color: Color.fromRGBO(0, 179, 134, 1.0),
+            ),
+          ],
+        ).show();
+      }
+
+
+
   }
 
   @override
@@ -212,15 +271,21 @@ class PasserCommandeState extends State<PasserCommande> {
             )
                 : Container(),
             SizedBox(height: 10.0),
-            RaisedButton(
-              child: Text('Pick an image'),
+            SimpleRoundIconButton(
+              backgroundColor: Colors.deepOrangeAccent,
+              buttonText: Text("TAKE AN IMAGE",
+                style: TextStyle(
+                    color: Colors.white
+                ),
+              ),
               onPressed: () {
-                print("test");
-                pickImage();
-                setState(() => countValue += 1);
-              },
+                    pickImage();
+                    setState(() => countValue += 1);
+               },
+              textColor: Colors.orangeAccent,
+              icon: Icon(Icons.camera_alt),
             ),
-            SizedBox(height: 10.0),
+            SizedBox(height: 25.0),
             /*RaisedButton(
               child: Text('Read Text'),
               onPressed: readText,
@@ -228,7 +293,14 @@ class PasserCommandeState extends State<PasserCommande> {
 
             Text(text)*/
             text == ""
-                ? Center(child: CircularProgressIndicator())
+                ? ColorLoader5(
+                  dotOneColor: Colors.deepOrange,
+                  dotTwoColor: Colors.deepOrangeAccent,
+              dotThreeColor: Colors.orangeAccent,
+              dotType: DotType.circle,
+              dotIcon: Icon(Icons.adjust),
+              duration: Duration(seconds: 1),
+                )
                 : RaisedButton(
                   child: Text('Next'),
                 ),
